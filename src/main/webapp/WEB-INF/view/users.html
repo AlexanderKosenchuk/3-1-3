@@ -22,8 +22,15 @@
             <td th:text="${user.surname}"></td>
             <td th:text="${user.age}"></td>
             <td th:text="${user.hobby}"></td>
-            <td><a th:href="@{edit/{id}(id=${user.id})}">Update</a> </td>
-            <td><a th:href="@{deleteUser/{id}(id=${user.id})}">Delete</a> </td>
+
+            <td><form th:method="GET" th:action="@{/{id}/edit(id=${user.id})}">
+                <input type="submit" value="Update">
+            </form></td>
+
+            <td><form th:method="DELETE" th:action="@{/(id=${user.id})}">
+                <input type="submit" value="Delete">
+            </form></td>
+
         </tr>
     </th:block>
 </table>

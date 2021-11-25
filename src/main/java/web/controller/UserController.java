@@ -49,9 +49,9 @@ public class UserController {
         return "redirect:/";
     }
 
-    @GetMapping(value = "")
-    public String deleteUser(Model model, User user) {
-
-        return "deleteUser";
+    @DeleteMapping
+    public String deleteUser(@ModelAttribute("user") User user) {
+        userService.deleteUser(user);
+        return "redirect:/";
     }
 }
