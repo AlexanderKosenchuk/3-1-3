@@ -6,12 +6,14 @@
     <title>Users</title>
 </head>
 <body>
-<table>
+<table th:width="500" th:border="2" th:bgcolor="white">
     <tr>
         <th>Id</th>
         <th>Name</th>
         <th>Surname</th>
+        <th>Age</th>
         <th>Hobby</th>
+
     </tr>
     <th:block th:each="user : ${allUsers}">
         <tr>
@@ -20,8 +22,15 @@
             <td th:text="${user.surname}"></td>
             <td th:text="${user.age}"></td>
             <td th:text="${user.hobby}"></td>
+            <td><a th:href="@{edit/{id}(id=${user.id})}">Update</a> </td>
+            <td><a th:href="@{deleteUser/{id}(id=${user.id})}">Delete</a> </td>
         </tr>
     </th:block>
 </table>
+
+<form th:method="GET" th:action="@{/new}">
+    <input type="submit" value="Add user">
+</form>
+
 </body>
 </html>
