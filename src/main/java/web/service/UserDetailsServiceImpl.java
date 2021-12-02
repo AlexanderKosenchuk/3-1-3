@@ -11,16 +11,16 @@ import web.model.User;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    private final UserDao userDao;
+    private final UserDao userDaoImpl;
 
     @Autowired
     public UserDetailsServiceImpl(UserDao userDao) {
-        this.userDao = userDao;
+        this.userDaoImpl = userDao;
     }
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        User user = userDao.getUserByName(s);
+        User user = userDaoImpl.getUserByName(s);
         if(user == null) {
             throw  new UsernameNotFoundException("User not found");
         }

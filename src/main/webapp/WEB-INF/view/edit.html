@@ -20,6 +20,12 @@
     <label for="hobby">Enter hobby: </label>
     <input type="text" th:field="*{hobby}" id="hobby"/>
 
+    <label for="password">Enter new password: </label>
+    <input type="text" th:field="*{password}" id="password"/>
+
+    <input type="checkbox" name="nameRoles" value="ROLE_ADMIN" th:field="*{roles}" />ADMIN
+    <input type="checkbox" name="nameRoles" value="ROLE_USER" th:field="*{roles}" />USER
+
     <br/>
     <input type="submit" value="Update">
 </form>

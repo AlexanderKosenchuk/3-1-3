@@ -14,7 +14,7 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private Long id;
+    private int id;
 
     @Column(name = "name")
     private String name;
@@ -41,19 +41,20 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(String name, String password, String surname, int age, String hobby) {
+    public User(String name, String password, String surname, int age, String hobby, Set<Role> roles) {
         this.name = name;
         this.surname = surname;
         this.age = age;
         this.hobby = hobby;
         this.password = password;
+        this.roles = roles;
     }
 
     public long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -134,5 +135,18 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", age=" + age +
+                ", hobby='" + hobby + '\'' +
+                ", roles=" + roles +
+                ", password='" + password + '\'' +
+                '}';
     }
 }

@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import web.service.UserService;
 
+import java.security.Principal;
+
 @Controller
 public class UserController {
 
@@ -21,8 +23,8 @@ public class UserController {
     }
 
     @GetMapping(value = "/user")
-    public String showUser(Model model) {
-
+    public String showUser(Principal principal, Model model) {
+        model.addAttribute("user", userDetailsService.loadUserByUsername(principal.getName()));
         return "user";
     }
 

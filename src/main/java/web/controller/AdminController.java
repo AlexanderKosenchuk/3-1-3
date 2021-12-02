@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import web.model.Role;
 import web.model.User;
 import web.service.UserService;
 
@@ -27,11 +28,11 @@ public class AdminController {
     public String showAllUsers(Model model) {
         List<User> allUsers = userService.getAllUser();
         model.addAttribute("allUsers", allUsers);
-        return "admin";
+        return "/admin";
     }
     //get запрос, который вернет представление new
     @GetMapping(value = "/admin/new")
-    public String addNewUser(@ModelAttribute("user") User user) {
+    public String addNewUser(@ModelAttribute("user") User user, @ModelAttribute("roles") Role role) {
         return "/new";
     }
 
@@ -41,7 +42,7 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @GetMapping(value = "/admin/{id}/edit")
+    @GetMapping(value = "/{id}/edit")
     public String editFormUser(@PathVariable("id") int id, Model model) {
         model.addAttribute("user", userService.getUserById(id));
         return "/edit";
@@ -53,7 +54,7 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @DeleteMapping(value = "/admin")
+    @DeleteMapping
     public String deleteUser(@ModelAttribute("user") User user) {
         userService.deleteUser(user);
         return "redirect:/admin";

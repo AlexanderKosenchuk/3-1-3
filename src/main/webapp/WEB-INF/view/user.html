@@ -1,17 +1,34 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>User</title>
 </head>
 <body>
+<table th:width="500" th:border="2" th:bgcolor="white">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Age</th>
+        <th>Hobby</th>
+        <th>Password</th>
 
-<div sec:authorize="isAuthenticated()">
-    Welcome <b><span sec:authentication="name">Username</span></b>
-    &nbsp;
-    <i><span sec:authentication="principal.authorities">Roles</span></i>
-</div>
+    </tr>
+
+        <tr>
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.name}"></td>
+            <td th:text="${user.surname}"></td>
+            <td th:text="${user.age}"></td>
+            <td th:text="${user.hobby}"></td>
+            <td th:text="${user.password}"></td>
+
+        </tr>
+
+</table>
+
 
 
 <form th:action="@{/logout}" method="post">
@@ -46,10 +63,6 @@
 <!--        </tr>-->
 <!--    </th:block>-->
 <!--</table>-->
-
-<form th:method="GET" th:action="@{/new}">
-    <input type="submit" value="Add user">
-</form>
 
 </body>
 </html>
