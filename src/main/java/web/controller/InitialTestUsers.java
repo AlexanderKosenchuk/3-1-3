@@ -4,13 +4,10 @@ package web.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import web.model.Role;
 import web.model.User;
 import web.service.UserService;
-
 import javax.annotation.PostConstruct;
 import java.util.HashSet;
 import java.util.Set;
@@ -21,15 +18,11 @@ public class InitialTestUsers {
     private final UserService userService;
     private final UserDetailsService userDetailsService;
 
-   // @Autowired
-   // private PasswordEncoder passwordEncoder;
-
     @Autowired
     public InitialTestUsers(UserService userService, @Qualifier("userDetailsServiceImpl")UserDetailsService userDetailsService) {
         this.userService = userService;
         this.userDetailsService = userDetailsService;
     }
-
 
     @PostConstruct
     private void initTestUserDb() {
