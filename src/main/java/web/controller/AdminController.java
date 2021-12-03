@@ -28,7 +28,7 @@ public class AdminController {
     public String showAllUsers(Model model) {
         List<User> allUsers = userService.getAllUser();
         model.addAttribute("allUsers", allUsers);
-        return "/admin";
+        return "admin";
     }
     //get запрос, который вернет представление new
     @GetMapping(value = "/admin/new")
