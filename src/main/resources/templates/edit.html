@@ -17,14 +17,14 @@
     <label for="age">Enter age: </label>
     <input type="text" th:field="*{age}" id="age"/>
 
-    <label for="hobby">Enter hobby: </label>
-    <input type="text" th:field="*{hobby}" id="hobby"/>
+    <label for="email">Enter email: </label>
+    <input type="text" th:field="*{email}" id="email"/>
 
     <label for="password">Enter new password: </label>
     <input type="text" th:field="*{password}" id="password"/>
 
-    <input type="checkbox" name="nameRoles" value="ROLE_ADMIN" th:field="*{roles}" />ADMIN
-    <input type="checkbox" name="nameRoles" value="ROLE_USER" th:field="*{roles}" />USER
+    <input type="checkbox" name="nameRoles" value="ADMIN" th:field="*{roles}" />ADMIN
+    <input type="checkbox" name="nameRoles" value="USER" th:field="*{roles}" />USER
 
     <br/>
     <input type="submit" value="Update">

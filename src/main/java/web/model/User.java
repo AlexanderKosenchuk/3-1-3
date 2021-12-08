@@ -25,8 +25,8 @@ public class User implements UserDetails {
     @Column(name = "age")
     private int age;
 
-    @Column(name = "hobby")
-    private String hobby;
+    @Column(name = "email")
+    private String email;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
@@ -41,11 +41,11 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(String name, String password, String surname, int age, String hobby, Set<Role> roles) {
+    public User(String name, String password, String surname, int age, String email, Set<Role> roles) {
         this.name = name;
         this.surname = surname;
         this.age = age;
-        this.hobby = hobby;
+        this.email = email;
         this.password = password;
         this.roles = roles;
     }
@@ -82,12 +82,12 @@ public class User implements UserDetails {
         this.age = age;
     }
 
-    public String getHobby() {
-        return hobby;
+    public String getEmail() {
+        return email;
     }
 
-    public void setHobby(String hobby) {
-        this.hobby = hobby;
+    public void setEmail(String hobby) {
+        this.email = email;
     }
 
     public Set<Role> getRoles() {
@@ -144,7 +144,7 @@ public class User implements UserDetails {
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", age=" + age +
-                ", hobby='" + hobby + '\'' +
+                ", hobby='" + email + '\'' +
                 ", roles=" + roles +
                 ", password='" + password + '\'' +
                 '}';

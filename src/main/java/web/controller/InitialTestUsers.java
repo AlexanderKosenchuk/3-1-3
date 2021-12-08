@@ -28,22 +28,22 @@ public class InitialTestUsers {
     private void initTestUserDb() {
 
         Set<Role> roles = new HashSet<>();
-        roles.add(new Role("ROLE_ADMIN"));
-        roles.add(new Role("ROLE_USER"));
+        roles.add(new Role("ADMIN"));
+        roles.add(new Role("USER"));
 
-        User userAll = new User("admin", "admin", "Ivanov", 27, "Java", roles);
+        User userAll = new User("admin", "admin", "Ivanov", 27, "admin@gmail.com", roles);
         userService.addUser(userAll);
 
         Set<Role> roles1 = new HashSet<>();
-        roles1.add(new Role("ROLE_USER"));
+        roles1.add(new Role("USER"));
 
-        User userOnly = new User("user", "user", "Petrov", 28, "Games", roles1);
+        User userOnly = new User("user", "user", "Petrov", 28, "user@gmail.com", roles1);
         userService.addUser(userOnly);
 
         Set<Role> roles2 = new HashSet<>();
-        roles2.add(new Role("ROLE_ADMIN"));
+        roles2.add(new Role("ADMIN"));
 
-        User userAdmin = new User("test", "test", "Testov", 28, "Games", roles2);
+        User userAdmin = new User("test", "test", "Testov", 28, "superadmin@gmail.com", roles2);
         userService.addUser(userAdmin);
 
     }

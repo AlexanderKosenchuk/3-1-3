@@ -56,6 +56,7 @@ public class UserServiceImpl implements UserService {
     public User getUserById(int id) {
         return userDaoImpl.getUserById(id);
     }
+
     @Override
     @Transactional
     public void saveRole(Role role) {
