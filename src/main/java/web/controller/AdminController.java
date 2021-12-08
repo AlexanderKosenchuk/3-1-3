@@ -42,14 +42,15 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @GetMapping(value = "/{id}/edit")
+    @GetMapping(value = "/{id}")
     public String editFormUser(@PathVariable("id") int id, Model model) {
         model.addAttribute("user", userService.getUserById(id));
-        return "/edit";
+        return "/admin";
     }
 
     @PatchMapping("/admin/{id}")
-    public String updateUser(@ModelAttribute("user") User user) {
+    public String updateUser(@PathVariable("id") int id, @ModelAttribute("user")  User user, Model model) {
+        model.addAttribute("movie", new User());
         userService.editUser(user);
         return "redirect:/admin";
     }
