@@ -274,10 +274,8 @@
                     </nav>
 
                         <div class="card text-center">
-                            <form class="form justify-content-center mx-auto" style="width: 300px">
+                            <form class="form justify-content-center mx-auto" style="width: 300px" th:action="@{/admin}" th:method="POST">
                             <div class="card-body h-75">
-
-                                <form class="form-group" th:action="@{/admin}" th:method="POST">
 
                                         <div class="form-group">
                                             <label for="nameAdd" class="col-form-label">
@@ -285,7 +283,7 @@
                                                     <strong>First name</strong>
                                                 </p>
                                             </label>
-                                            <input type="text" class="form-control" id="nameAdd" name="name">
+                                            <input type="text" class="form-control" id="nameAdd" name="name" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="surnameAdd" class="col-form-label">
@@ -293,7 +291,7 @@
                                                     <strong>Last name</strong>
                                                 </p>
                                             </label>
-                                            <input type="text" class="form-control" id="surnameAdd" name="surname">
+                                            <input type="text" class="form-control" id="surnameAdd" name="surname" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="ageAdd" class="col-form-label">
@@ -301,7 +299,7 @@
                                                     <strong>Age</strong>
                                                 </p>
                                             </label>
-                                            <input type="text" class="form-control" id="ageAdd" name="age">
+                                            <input type="text" class="form-control" id="ageAdd" name="age" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="emailAdd" class="col-form-label">
@@ -309,7 +307,7 @@
                                                     <strong>Email</strong>
                                                 </p>
                                             </label>
-                                            <input type="text" class="form-control" id="emailAdd" name="email">
+                                            <input type="email" class="form-control" id="emailAdd" name="email" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="passwordAdd" class="col-form-label">
@@ -317,7 +315,7 @@
                                                     <strong>password</strong>
                                                 </p>
                                             </label>
-                                            <input type="password" class="form-control" id="passwordAdd" name="password">
+                                            <input type="password" class="form-control" id="passwordAdd" name="password" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="RoleAdd" class="col-form-label">
@@ -325,14 +323,13 @@
                                                     <strong>Role</strong>
                                                 </p>
                                             </label>
-                                            <select multiple class="form-control" id="RoleAdd" size="2" name="role">
+                                            <select multiple class="form-control" id="RoleAdd" size="2" name="roles" required>
                                                 <option>ADMIN</option>
                                                 <option selected>USER</option>
                                             </select>
                                         </div>
-                                        <button type="submit" class="btn btn-success" data-target="#profile">Add new user</button>
+                                        <button type="submit" class="btn btn-success">Add new user</button>
 
-                                </form>
 
                             </div>
                             </form>

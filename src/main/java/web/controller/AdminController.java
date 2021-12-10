@@ -30,13 +30,13 @@ public class AdminController {
         model.addAttribute("allUsers", allUsers);
         return "admin";
     }
-    //get запрос, который вернет представление new
-//    @GetMapping(value = "/admin/new")
+//    //get запрос, который вернет представление new
+//    @GetMapping(value = "/admin/")
 //    public String addNewUser(@ModelAttribute("user") User user, @ModelAttribute("roles") Role role) {
 //        return "/admin";
 //    }
 
-    @PostMapping(value = "/admin/add")
+    @PostMapping(value = "/admin")
     public String createUser(@ModelAttribute("user") User user) {
         userService.addUser(user);
         return "redirect:/admin";
