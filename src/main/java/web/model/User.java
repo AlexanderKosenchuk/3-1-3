@@ -86,7 +86,7 @@ public class User implements UserDetails {
         return email;
     }
 
-    public void setEmail(String hobby) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
@@ -144,7 +144,7 @@ public class User implements UserDetails {
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", age=" + age +
-                ", hobby='" + email + '\'' +
+                ", email='" + email + '\'' +
                 ", roles=" + roles +
                 ", password='" + password + '\'' +
                 '}';

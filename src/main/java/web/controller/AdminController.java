@@ -31,12 +31,12 @@ public class AdminController {
         return "admin";
     }
     //get запрос, который вернет представление new
-    @GetMapping(value = "/admin/new")
-    public String addNewUser(@ModelAttribute("user") User user, @ModelAttribute("roles") Role role) {
-        return "/new";
-    }
+//    @GetMapping(value = "/admin/new")
+//    public String addNewUser(@ModelAttribute("user") User user, @ModelAttribute("roles") Role role) {
+//        return "/admin";
+//    }
 
-    @PostMapping(value = "/admin")
+    @PostMapping(value = "/admin/add")
     public String createUser(@ModelAttribute("user") User user) {
         userService.addUser(user);
         return "redirect:/admin";
@@ -49,8 +49,7 @@ public class AdminController {
     }
 
     @PatchMapping("/admin/{id}")
-    public String updateUser(@PathVariable("id") int id, @ModelAttribute("user")  User user, Model model) {
-        model.addAttribute("movie", new User());
+    public String updateUser(@PathVariable("id") int id, @ModelAttribute("user")  User user) {
         userService.editUser(user);
         return "redirect:/admin";
     }

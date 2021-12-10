@@ -35,8 +35,6 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void addUser(User user) {
-        //user.setRoles(Collections.singleton(new Role()));
-
         entityManager.persist(user);
     }
 
