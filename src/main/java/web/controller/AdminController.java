@@ -10,6 +10,7 @@ import web.model.Role;
 import web.model.User;
 import web.service.UserService;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -25,9 +26,10 @@ public class AdminController {
     }
 
     @GetMapping(value = "/admin")
-    public String showAllUsers(Model model) {
+    public String showAllUsers(Principal principal, Model model) {
         List<User> allUsers = userService.getAllUser();
         model.addAttribute("allUsers", allUsers);
+        model.addAttribute("oneUser", userDetailsService.loadUserByUsername(principal.getName()));
         return "admin";
     }
 //    //get запрос, который вернет представление new
