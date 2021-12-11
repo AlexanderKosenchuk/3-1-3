@@ -14,9 +14,13 @@
 
 <nav class="navbar navbar-expand navbar-dark bg-dark">
     <ul class="navbar-nav mr-auto text-white ">
-        <a class="navbar-brand" href="#">Тут атрибуты юзера</a>
-        <a class="nav-link btn-outline-secondary" href="#">Logout</a>
+        <span class="navbar-brand" th:text="${oneUser.email}"></span>
     </ul>
+    <form class="form-inline" th:action="@{/logout}" method="post">
+        <a class="nav-link" th:href="@{/logout}">
+            <p class="text-secondary">Logout</p>
+        </a>
+    </form>
 </nav>
 <div class="container-fluid">
     <div class="row">
