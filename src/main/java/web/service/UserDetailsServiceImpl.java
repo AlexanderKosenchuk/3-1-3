@@ -18,9 +18,18 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         this.userDaoImpl = userDao;
     }
 
+//    @Override
+//    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+//        User user = userDaoImpl.getUserByName(s);
+//        if(user == null) {
+//            throw  new UsernameNotFoundException("User not found");
+//        }
+//        return user;
+//    }
+
     @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        User user = userDaoImpl.getUserByName(s);
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = userDaoImpl.getUserByEmail(email);
         if(user == null) {
             throw  new UsernameNotFoundException("User not found");
         }

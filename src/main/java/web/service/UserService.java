@@ -12,4 +12,5 @@ public interface UserService {
     void editUser(User user);
     User getUserById(int id);
     void saveRole(Role role);
+    User getUserByEmail(String email);
 }

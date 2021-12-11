@@ -59,6 +59,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
+    public User getUserByEmail(String email){
+        return userDaoImpl.getUserByEmail(email);
+    }
+
+    @Override
+    @Transactional
     public void saveRole(Role role) {
 
         userDaoImpl.saveRole(role);
