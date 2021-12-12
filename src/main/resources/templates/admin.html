@@ -11,10 +11,15 @@
     <title>Admin panel</title>
 </head>
 <body>
-
+<!--верхняя полоса-->
 <nav class="navbar navbar-expand navbar-dark bg-dark">
     <ul class="navbar-nav mr-auto text-white ">
         <span class="navbar-brand" th:text="${oneUser.email}"></span>
+        <p class="h5 mt-2">with roles:</p>
+        <span class="navbar-brand"
+              th:each="role :${oneUser.getRoles()}">
+              <label th:text="${role.role}"/>
+        </span>
     </ul>
     <form class="form-inline" th:action="@{/logout}" method="post">
         <a class="nav-link" th:href="@{/logout}">
