@@ -12,8 +12,9 @@ import web.service.UserService;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.NoSuchElementException;
 
-@Controller
+@RestController
 public class AdminController {
 
     private final UserService userService;
@@ -26,39 +27,32 @@ public class AdminController {
     }
 
     @GetMapping(value = "/admin")
-    public String showAllUsers(Principal principal, Model model) {
+    public  List<User> showAllUsers() {
         List<User> allUsers = userService.getAllUser();
-        model.addAttribute("allUsers", allUsers);
-        model.addAttribute("oneUser", userDetailsService.loadUserByUsername(principal.getName()));
-        return "admin";
+        return allUsers;
     }
-//    //get запрос, который вернет представление new
-//    @GetMapping(value = "/admin/")
-//    public String addNewUser(@ModelAttribute("user") User user, @ModelAttribute("roles") Role role) {
-//        return "/admin";
-//    }
 
     @PostMapping(value = "/admin")
-    public String createUser(@ModelAttribute("user") User user) {
+    public User createUser(@RequestBody User user) {
         userService.addUser(user);
-        return "redirect:/admin";
+        return user;
     }
 
-    @GetMapping(value = "/{id}")
-    public String editFormUser(@PathVariable("id") int id, Model model) {
-        model.addAttribute("user", userService.getUserById(id));
-        return "/admin";
+    @GetMapping(value = "/admin/{id}")
+    public User getOneUser(@PathVariable("id") int id) {
+        User user = userService.getUserById(id);
+        return user;
     }
 
-    @PatchMapping("/admin/{id}")
-    public String updateUser(@PathVariable("id") int id, @ModelAttribute("user")  User user) {
+    @PatchMapping("/admin")
+    public User updateUser(@RequestBody User user) {
         userService.editUser(user);
-        return "redirect:/admin";
+        return user;
     }
 
-    @DeleteMapping
-    public String deleteUser(@ModelAttribute("user") User user) {
-        userService.deleteUser(user);
-        return "redirect:/admin";
+    @DeleteMapping(value = "/admin/{id}")
+    public String deleteUser(@PathVariable int id) {
+        userService.deleteUser(userService.getUserById(id));
+        return "User with ID = " + id + " was deleted";
     }
 }
