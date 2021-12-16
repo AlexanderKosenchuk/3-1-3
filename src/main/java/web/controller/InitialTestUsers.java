@@ -5,10 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import web.model.Role;
 import web.model.User;
 import web.service.UserService;
 import javax.annotation.PostConstruct;
+import javax.persistence.TypedQuery;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,28 +25,30 @@ public class InitialTestUsers {
         this.userService = userService;
         this.userDetailsService = userDetailsService;
     }
+    @Transactional
 
-    @PostConstruct
-    private void initTestUserDb() {
+    public void initTestUserDb() {
+
+        Role roleAdmin = new Role("ADMIN");
+        userService.saveRole(roleAdmin);
 
         Set<Role> roles = new HashSet<>();
-        roles.add(new Role("ADMIN"));
-        roles.add(new Role("USER"));
 
         User userAll = new User("admin", "admin", "Ivanov", 27, "admin@gmail.com", roles);
         userService.addUser(userAll);
 
+        userAll.addRole(roleAdmin);
+        userService.editUser(userAll);
+//------------------------------------------
+        Role roleUser = new Role("USER");
+        userService.saveRole(roleUser);
+
         Set<Role> roles1 = new HashSet<>();
-        roles1.add(new Role("USER"));
 
         User userOnly = new User("user", "user", "Petrov", 28, "user@gmail.com", roles1);
         userService.addUser(userOnly);
 
-        Set<Role> roles2 = new HashSet<>();
-        roles2.add(new Role("ADMIN"));
-
-        User userAdmin = new User("test", "test", "Testov", 28, "superadmin@gmail.com", roles2);
-        userService.addUser(userAdmin);
-
+        userOnly.addRole(roleUser);
+        userService.editUser(userOnly);
     }
 }

@@ -11,6 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public class UserDaoImpl implements UserDao {
@@ -48,14 +49,6 @@ public class UserDaoImpl implements UserDao {
         return entityManager.find(User.class, id);
     }
 
-//    @Override
-//    public User getUserByName(String name) {
-//        TypedQuery<User> query = entityManager.createQuery("select u from User u where u.name = :name", User.class);
-//        query.setParameter("name", name);
-//        return query.getSingleResult();
-//        //return entityManager.find(User.class, name);
-//    }
-
     @Override
     public User getUserByEmail(String email) {
         TypedQuery<User> queryEmail = entityManager.createQuery("select u from User u where u.email = :email", User.class);
@@ -68,5 +61,4 @@ public class UserDaoImpl implements UserDao {
         entityManager.persist(role);
 
     }
-
 }
