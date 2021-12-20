@@ -58,6 +58,13 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void editUser(User user) {
+
+        Set<Role> newRole = new HashSet<>();
+
+        for (Role role: user.getRoles()) {
+            newRole.add(roleDaoImpl.getRoleByName(role.getRole()));
+        }
+        user.setRoles(newRole);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userDaoImpl.editUser(user);
     }

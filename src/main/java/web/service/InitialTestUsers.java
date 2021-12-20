@@ -1,4 +1,4 @@
-package web.controller;
+package web.service;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ public class InitialTestUsers {
         this.userDetailsService = userDetailsService;
     }
     @Transactional
-
+  //  @PostConstruct
     public void initTestUserDb() {
 
         Role roleAdmin = new Role("ADMIN");
@@ -38,7 +38,7 @@ public class InitialTestUsers {
         userService.addUser(userAll);
 
         userAll.addRole(roleAdmin);
-        userService.editUser(userAll);
+     //   userService.editUser(userAll);
 //------------------------------------------
         Role roleUser = new Role("USER");
         userService.saveRole(roleUser);
@@ -49,6 +49,6 @@ public class InitialTestUsers {
         userService.addUser(userOnly);
 
         userOnly.addRole(roleUser);
-        userService.editUser(userOnly);
+     //   userService.editUser(userOnly);
     }
 }

@@ -2,32 +2,34 @@ package web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+import web.model.User;
 import web.service.UserService;
 
 import java.security.Principal;
 
-@Controller
-@RequestMapping("/user")
-public class UserController {
+@RestController
+public class UserRestController {
 
     private final UserService userService;
     private final UserDetailsService userDetailsService;
 
     @Autowired
-    public UserController(UserService userService, @Qualifier("userDetailsServiceImpl")UserDetailsService userDetailsService) {
+    public UserRestController(UserService userService, @Qualifier("userDetailsServiceImpl")UserDetailsService userDetailsService) {
         this.userService = userService;
         this.userDetailsService = userDetailsService;
     }
 
-    @GetMapping()
-    public String showUser(Principal principal, Model model) {
-        model.addAttribute("user", userDetailsService.loadUserByUsername(principal.getName()));
-        return "user";
+    @GetMapping(value = "/user/info")
+    public User showUser(@RequestBody Principal principal) {
+        User user = (User) userDetailsService.loadUserByUsername(principal.getName());
+        return user;
     }
 
 }
