@@ -52,7 +52,7 @@
                             <a class="nav-link active" id="user-table-all-tab" data-toggle="tab" href="#userTableAll" role="tab"
                                aria-controls="home" aria-selected="true">Users table</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item newUser">
                             <a class="nav-link" id="user-tab" data-toggle="tab" href="#newUser" role="tab"
                                aria-controls="profile" aria-selected="false">New user</a>
                         </li>
@@ -78,7 +78,7 @@
                                     <th>Delete</th>
                                 </tr>
                                 </thead>
-                                <tbody >
+                                <tbody id="tableAllUsers">
                                 </tbody>
                             </table>
                             <!--Edit модальное окно-->
@@ -165,23 +165,18 @@
                                                                     <strong>Role</strong>
                                                                 </p>
                                                             </label>
-                                                            <select multiple class="form-control"
-                                                                    id="Role"
-                                                                    name="roles"
-                                                                    size="2">
-                                                                <option>ADMIN</option>
-                                                                <option selected>USER</option>
+                                                            <select class="form-control" id="Role" name="roles"
+                                                                    size="2" multiple="multiple" required>
+                                                               <option>ADMIN</option>
+                                                                <option>USER</option>
                                                             </select>
                                                         </div>
 
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                            data-dismiss="modal">Close
-                                                    </button>
-                                                    <button type="submit" class="btn btn-primary">Edit
-                                                    </button>
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button type="submit" id="editButton" class="btn btn-primary">Edit</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -204,7 +199,7 @@
                                             </button>
                                         </div>
                                         <div class="modal-body text-center">
-                                            <form class="form-group">
+                                            <form class="delete-form-group">
                                                 <div class="modal-body text-center">
 
                                                     <div class="container-fluid justify-content-center mx-auto">
@@ -247,7 +242,7 @@
                                                                     <strong>Age</strong>
                                                                 </p>
                                                             </label>
-                                                            <input type="text" class="form-control"
+                                                            <input type="number" class="form-control"
                                                                    name="age"
                                                                    id="ageD" readonly>
                                                         </div>
@@ -268,24 +263,17 @@
                                                                     <strong>Role</strong>
                                                                 </p>
                                                             </label>
-                                                            <select multiple class="form-control"
-                                                                    id="RoleD"
-                                                                    name="roles"
-                                                                    size="2" readonly>
+                                                            <select class="form-control" id="RoleD" name="roles" size="2" multiple="multiple" disabled>
                                                                 <option>ADMIN</option>
-                                                                <option selected>USER</option>
+                                                                <option>USER</option>
                                                             </select>
                                                         </div>
 
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                            data-dismiss="modal">Close
-                                                    </button>
-                                                    <button type="submit" class="btn btn-danger">
-                                                        Delete
-                                                    </button>
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button type="submit" id="deleteButtonToDb" class="btn btn-danger">Delete</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -354,13 +342,13 @@
                                                     <strong>Role</strong>
                                                 </p>
                                             </label>
-                                            <select multiple class="form-control" id="RoleAdd" size="2" name="roles"
-                                                    required>
-                                                <option>ADMIN</option>
-                                                <option selected>USER</option>
+                                            <select class="form-control" id="RoleAdd" size="2" name="roles"
+                                                    multiple="multiple" required>
+                                               <option>ADMIN</option>
+                                                <option>USER</option>
                                             </select>
                                         </div>
-                                        <button id="newUserBtn" type="submit" class="btn btn-success">Add new user</button>
+                                        <button id="addNewUserButton" type="submit" class="btn btn-success">Add new user</button>
                                     </div>
                                 </form>
                             </div>
@@ -413,6 +401,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-<script src="../js/admin.js"></script>
+<script src="/js/admin.js"></script>
 </body>
 </html>
