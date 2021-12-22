@@ -95,7 +95,7 @@
                                             </button>
                                         </div>
                                         <div class="modal-body text-center">
-                                            <form class="form-group">
+                                            <form class="edit-form-group">
                                                 <div class="modal-body text-center">
                                                     <div class="container-fluid justify-content-center mx-auto">
                                                         <div class="form-group">
@@ -371,14 +371,16 @@
                             <th>Email</th>
                             <th>Role</th>
                         </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                        <tr th:object="${oneUser}">
+                            <td th:text="${oneUser.id}"></td>
+                            <td th:text="${oneUser.name}"></td>
+                            <td th:text="${oneUser.surname}"></td>
+                            <td th:text="${oneUser.age}"></td>
+                            <td th:text="${oneUser.email}"></td>
                             <td>
-
+                                <th:block th:each="role :${oneUser.getRoles()}">
+                                    <label th:text="${role.role}"/>
+                                </th:block>
                             </td>
                         </tr>
 

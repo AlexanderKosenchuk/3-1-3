@@ -49,7 +49,7 @@ public class AdminRestController {
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
-    @PatchMapping("/admin")
+    @PutMapping("/admin")
     public ResponseEntity<User> updateUser(@RequestBody User user) {
         userService.editUser(user);
         return new ResponseEntity<>(user, HttpStatus.OK);

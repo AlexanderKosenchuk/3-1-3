@@ -1,9 +1,9 @@
 const url = 'http://localhost:8080/admin/all'
 
-
-
 const addUserForm = document.querySelector('.new-user-form');
 const deleteUserForm = document.querySelector('.delete-form-group')
+const editUserForm = document.querySelector('.edit-form-group')
+const userNavForm = document.querySelector('.user-nav-link')
 
 const userList = document.querySelector('.thead');
 const tableFoUsers = document.querySelector('tbody')
@@ -23,7 +23,6 @@ const ageDelValue = document.getElementById('ageD')
 const emailDelValue = document.getElementById('emailD')
 const roleDelValue = document.getElementById('RoleD')
 
-
 const formModalEdit = document.querySelector('form')
 const idEdit = document.getElementById('id')
 const nameEdit = document.getElementById('name')
@@ -33,66 +32,17 @@ const emailEdit = document.getElementById('email')
 const passwordEdit = document.getElementById('password')
 const roleEdit = document.getElementById('Role')
 
-let opcion = ''
+let option = ''
 
 
-// $(async function () {
-//     await getTableWithUsers();
-//     // getNewUserForm();
-//    // await getDefaultModal();
-//     // addNewUser();
-// })
-//
-//
-// const userFetchService = {
-//     head: {
-//         'Accept': 'application/json',
-//         'Content-Type': 'application/json',
-//         'Referer': null
-//     },
-//
-//     showAllUsers: async () => await fetch(url),
-//
-// }
-//
-// async function getTableWithUsers() {
-//     let table = $('#UsersTable tbody');
-//     table.empty();
-//
-//     await userFetchService.showAllUsers()
-//         .then(res => res.json())
-//         .then(users => {
-//             users.forEach(user => {
-//                 let tableFilling = `$(
-//                         <tr>
-//                             <td>${user.id}</td>
-//                             <td>${user.name}</td>
-//                             <td>${user.surname}</td>
-//                             <td>${user.age}</td>
-//                             <td>${user.email}</td>
-//                             <td id="roles${user.id}">${user.roles.map(r => r.role).join(', ')}</td>
-//                             <td>
-//                                 <button type="button" id="editButton" data-userid="${user.id}" data-action="edit" class="btn btn-info"
-//                                 data-toggle="modal" data-target="#EditModal">Edit</button>
-//                             </td>
-//                             <td>
-//                                 <button type="button" data-userid="${user.id}" data-action="delete" class="btn btn-danger"
-//                                 data-toggle="modal" data-target="#MyModal">Delete</button>
-//                             </td>
-//                         </tr>
-//                 )`;
-//                 table.append(tableFilling);
-//             })
-//         })
-//
-//
-// }
-
-
-//function table
-const Mytable = (admin) => {
-    admin.forEach(user => {
-        result += `<tr id="tr-table">
+function fillTheTable() {
+    fetch(url,)
+        .then(res => res.json())
+        .then((data) => {
+            result = ''
+            data.forEach(user => {
+                result += `
+                    <tr id="tr-table">
                         <td>${user.id}</td>
                         <td>${user.name}</td>
                         <td>${user.surname}</td>
@@ -109,25 +59,15 @@ const Mytable = (admin) => {
                         </td>  
                    </tr>    
                 `
-    });
-    tableFoUsers.innerHTML = result
-
+            });
+            tableFoUsers.innerHTML = result
+        })
 }
 //заполняем табличку данными юзеров
 fetch(url)
     .then(response => response.json())
-    .then(data => Mytable(data))
+    .then(data => fillTheTable(data))
     .catch(error => console.log(error))
-
-
-tableFoUsers.addEventListener('click', (e) => {
-    e.preventDefault();
-    let delButtonIsPressed = e.target.id == 'deleteButton';
-})
-
-
-
-
 
 //отработка Add
 addUserForm.addEventListener('submit', (e) => {
@@ -152,7 +92,7 @@ addUserForm.addEventListener('submit', (e) => {
         .then(data => {
             const array = []
             array.push(data)
-            Mytable(array)
+            fillTheTable(array)
             $('#user-table-all-tab').tab('show')
             $('#nameAdd').empty().val('')
             $('#surnameAdd').empty().val('')
@@ -191,28 +131,18 @@ on(document, 'click', '.btn-danger', e => {
     DeleteModal.show()
 })
 
-
-$('#deleteButtonToDb').on('click', (e) => {
+deleteUserForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     let url = 'http://localhost:8080/admin'
     let userId = $('#idD').val();
-    console.log(userId)
-    fetch(`${url}/${userId}`, {
+    await fetch(`${url}/${userId}`, {
         method: 'DELETE',
     })
-        .then(res => res.json())
-        .then(data => {
-            const array = []
-            array.push(data)
-            Mytable(array)
-            $('#tr-table' + userId).remove();
-            $('#DeleteModal').modal('hide');
-            $('#user-table-all-tab').tab('show');
-        })
+    $('#DeleteModal').modal('hide');
+    $('#user-table-all-tab').tab('show');
+    fillTheTable()
 
-});
-
-
+})
 
 //Заполняем и вызваем модальное окно Edit
 let idForm = 0
@@ -233,26 +163,43 @@ on(document, 'click', '.btn-info', e => {
     emailEdit.value = emailForm
     passwordEdit.value = passForm
     roleEdit.value = rolesForm
-    opcion = 'edit'
+    option = 'edit'
     EditModal.show()
 })
 
-//
-// fetch('http://localhost:8080/admin/' + idForm, {
-//     method: 'PATCH',
-//     headers: {
-//         'Content-Type':'application/json'
-//     },
-//     body: JSON.stringify({
-//         name: nameEdit.value,
-//         surname: lastnameEdit.value,
-//         age: ageEdit.value,
-//         email: emailEdit.value,
-//         password: passwordEdit.value,
-//         Role: roleEdit.value
-//     })
-// })
-// .then( res => res.json() )
-// .then( res => location.reload())
-//
-// EditModal.hide()
+editUserForm.addEventListener('submit', async (e) => {
+    e.preventDefault()
+    let url = 'http://localhost:8080/admin'
+    //let usereditId = $('#id').val();
+    await fetch(url, {
+        method: 'PUT',
+        headers: {
+        'Content-Type':'application/json'
+        },
+        body: JSON.stringify({
+            id:idEdit.value,
+            name: nameEdit.value,
+            surname: lastnameEdit.value,
+            age: ageEdit.value,
+            email: emailEdit.value,
+            password: passwordEdit.value,
+            roles: Array.from(roleEdit.options)
+                .filter(option => option.selected)
+                .map(option => option.value)
+    })
+})
+        .then( res => res.json() )
+        .then( data => {
+            const arrayEdit = []
+            arrayEdit.push(data)
+            $('#EditModal').modal('hide');
+            $('#user-table-all-tab').tab('show');
+            fillTheTable(arrayEdit)
+        })
+})
+
+$('#v-pills-profile-tab').addEventListener('click', (e) => {
+    e.preventDefault()
+    let url = `http://localhost:8080/admin/`
+
+})
